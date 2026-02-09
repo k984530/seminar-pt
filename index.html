@@ -1,0 +1,1718 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 에이전틱 기반 제품 홍보 조직</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/plugin/highlight/monokai.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+        :root {
+            /* Color System */
+            --primary: #3B7CF5;
+            --primary-light: #6B9EF8;
+            --primary-dark: #1E56D0;
+            --primary-50: #EEF4FF;
+            --primary-100: #D4E4FE;
+            --navy: #0F1B3D;
+            --navy-light: #1A2B5A;
+            --text: #1A1F36;
+            --text-light: #4A5578;
+            --text-muted: #8892B0;
+            --bg: #FAFBFE;
+            --bg-surface: #F3F5FA;
+            --bg-elevated: #FFFFFF;
+            --border: #E2E8F0;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --terminal-bg: #0D1117;
+            --terminal-header: #161B22;
+
+            /* Typography */
+            --font-display: 'Sora', 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-body: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', 'SF Mono', 'Consolas', monospace;
+
+            /* Shadows */
+            --shadow-sm: 0 1px 2px rgba(15, 27, 61, 0.04);
+            --shadow-md: 0 4px 12px rgba(15, 27, 61, 0.06);
+            --shadow-lg: 0 8px 30px rgba(15, 27, 61, 0.08);
+            --shadow-xl: 0 16px 48px rgba(15, 27, 61, 0.12);
+            --shadow-primary: 0 4px 16px rgba(59, 124, 245, 0.15);
+
+            /* Radius */
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --radius-xl: 20px;
+
+            /* Spacing */
+            --space-xs: 0.25em;
+            --space-sm: 0.5em;
+            --space-md: 1em;
+            --space-lg: 1.5em;
+            --space-xl: 2.5em;
+
+            /* Transitions */
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        .reveal-viewport { background: var(--bg); transition: background 0.8s ease; }
+
+        .reveal {
+            font-family: var(--font-body);
+            color: var(--text);
+        }
+
+        .reveal .slides section {
+            text-align: left;
+            padding: 80px 88px;
+            background: var(--bg);
+        }
+
+        .scroll-wrapper {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .scroll-wrapper::-webkit-scrollbar {
+            display: none;
+        }
+
+        .reveal h1 {
+            font-family: var(--font-display);
+            font-size: 3.6em;
+            font-weight: 800;
+            color: var(--navy);
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+        }
+
+        .reveal h1 .highlight {
+            color: var(--primary);
+        }
+
+        .reveal h2 {
+            font-family: var(--font-display);
+            font-size: 2.6em;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 0.6em;
+            letter-spacing: -0.02em;
+        }
+
+        .reveal h3 {
+            font-family: var(--font-display);
+            font-size: 0.85em;
+            font-weight: 600;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 0.6em;
+        }
+
+        .reveal p {
+            font-size: 1.2em;
+            line-height: 1.75;
+            color: var(--text-light);
+        }
+
+        .reveal .lead {
+            font-size: 1.4em;
+            font-weight: 500;
+            color: var(--text);
+            line-height: 1.65;
+        }
+
+        /* Parallax Stars Animation */
+        @keyframes animStar {
+            from { transform: translateY(0px); }
+            to { transform: translateY(-2000px); }
+        }
+
+        /* 타이틀 슬라이드 */
+        .title-slide {
+            display: flex !important;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%) !important;
+            position: relative;
+            overflow: hidden;
+            padding-top: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            min-height: 720px;
+        }
+
+        .stars-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: transparent;
+            animation: animStar linear infinite;
+        }
+
+        .stars-layer::after {
+            content: '';
+            position: absolute;
+            top: 2000px;
+            background: transparent;
+        }
+
+        /* width/height = 별 크기 (box-shadow 기준점) */
+        #stars-small, #stars-small::after { width: 1px; height: 1px; }
+        #stars-medium, #stars-medium::after { width: 2px; height: 2px; }
+        #stars-big, #stars-big::after { width: 3px; height: 3px; }
+
+        #stars-small { animation-duration: 50s; }
+        #stars-medium { animation-duration: 100s; }
+        #stars-big { animation-duration: 150s; }
+
+        .title-slide .badge {
+            display: inline-block;
+            background: var(--primary-50);
+            color: var(--primary);
+            padding: 8px 18px;
+            font-family: var(--font-display);
+            font-size: 0.75em;
+            font-weight: 600;
+            border-radius: var(--radius-sm);
+            margin-bottom: 1.8em;
+            letter-spacing: 0.08em;
+            border: 1px solid var(--primary-100);
+        }
+
+        .title-slide h1 {
+            font-size: 3.8em;
+            margin-bottom: 0.4em;
+        }
+
+        .title-slide .subtitle {
+            font-size: 1.35em;
+            color: var(--text-light);
+            max-width: 680px;
+            line-height: 1.7;
+            margin-bottom: 0;
+            font-weight: 400;
+        }
+
+        .title-slide .meta {
+            font-size: 0.9em;
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-top: 2em;
+            letter-spacing: 0.02em;
+        }
+
+        /* 섹션 디바이더 */
+        .section-slide {
+            display: flex !important;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center !important;
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%) !important;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-slide::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            right: -60px;
+            width: 360px;
+            height: 360px;
+            background: radial-gradient(circle, rgba(59, 124, 245, 0.15) 0%, transparent 70%);
+        }
+
+        .section-slide::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(59, 124, 245, 0.1) 0%, transparent 70%);
+        }
+
+        .section-slide .section-num {
+            font-family: var(--font-display);
+            font-size: 0.9em;
+            font-weight: 600;
+            color: var(--primary-light);
+            margin-bottom: 1em;
+            letter-spacing: 0.25em;
+        }
+
+        .section-slide h2 {
+            color: white;
+            font-size: 3.2em;
+            margin-bottom: 0.3em;
+        }
+
+        .section-slide p {
+            color: rgba(255,255,255,0.65);
+            font-size: 1.3em;
+        }
+
+        /* 카드 그리드 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 1.5em 0;
+        }
+
+        .card-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+        .card-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+        .card-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+        .card {
+            background: var(--bg-elevated);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out), border-color 0.3s var(--ease-out);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transition: transform 0.3s var(--ease-out);
+            transform-origin: left;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-100);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card .card-icon {
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+
+        .card .card-title {
+            font-family: var(--font-display);
+            font-size: 1.2em;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 0.3em;
+        }
+
+        .card .card-desc {
+            font-size: 1em;
+            color: var(--text-light);
+            line-height: 1.55;
+        }
+
+        .card .card-badge {
+            display: inline-block;
+            background: var(--primary-50);
+            color: var(--primary);
+            padding: 4px 12px;
+            font-size: 0.8em;
+            font-weight: 600;
+            border-radius: var(--radius-sm);
+            margin-top: 0.8em;
+        }
+
+        .card.highlight {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-primary);
+        }
+
+        .card.highlight::before { display: none; }
+
+        .card.highlight .card-title,
+        .card.highlight .card-desc { color: white; }
+        .card.highlight .card-badge { background: rgba(255,255,255,0.2); color: white; }
+
+        /* 팀 카드 */
+        .team-card {
+            background: var(--bg-elevated);
+            border-radius: var(--radius-lg);
+            padding: 22px;
+            border: 1px solid var(--border);
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+        }
+
+        .team-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .team-card .team-icon { font-size: 2.5em; margin-bottom: 0.3em; }
+        .team-card .team-name {
+            font-family: var(--font-display);
+            font-size: 1.2em;
+            font-weight: 600;
+            color: var(--navy);
+        }
+        .team-card .team-count {
+            font-size: 0.95em;
+            color: var(--text-muted);
+            margin: 0.3em 0;
+        }
+        .team-card .team-tech {
+            display: inline-block;
+            background: var(--primary-50);
+            color: var(--primary);
+            padding: 4px 10px;
+            font-size: 0.8em;
+            font-weight: 600;
+            border-radius: var(--radius-sm);
+            margin-top: 0.5em;
+        }
+
+        /* 플로우 */
+        .flow {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 1.5em 0;
+        }
+
+        .flow-step {
+            flex: 1;
+            background: var(--bg-elevated);
+            border-radius: var(--radius-md);
+            padding: 20px 15px;
+            text-align: center;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+        }
+
+        .flow-step:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .flow-step .step-icon { font-size: 2.2em; margin-bottom: 0.3em; }
+        .flow-step .step-title {
+            font-family: var(--font-display);
+            font-size: 1.05em;
+            font-weight: 600;
+            color: var(--navy);
+        }
+
+        .flow-step.active {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-primary);
+        }
+
+        .flow-step.active .step-title { color: white; }
+
+        .flow-arrow {
+            font-size: 1.1em;
+            color: var(--primary-light);
+            flex-shrink: 0;
+        }
+
+        /* 리스트 */
+        .numbered-list { margin: 1.5em 0; }
+
+        .numbered-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+            padding: 18px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .numbered-item:last-child { border-bottom: none; }
+
+        .numbered-item .num {
+            width: 36px;
+            height: 36px;
+            background: var(--primary-50);
+            color: var(--primary);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 0.95em;
+            flex-shrink: 0;
+        }
+
+        .numbered-item .content .title {
+            font-family: var(--font-display);
+            font-size: 1.25em;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 0.2em;
+        }
+
+        .numbered-item .content .desc {
+            font-size: 1.05em;
+            color: var(--text-light);
+        }
+
+        /* 워크플로우 단계 */
+        .phases {
+            display: flex;
+            gap: 14px;
+            margin: 1.5em 0;
+        }
+
+        .phase {
+            flex: 1;
+            background: var(--bg-elevated);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            text-align: center;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            position: relative;
+        }
+
+        .phase::after {
+            content: '→';
+            position: absolute;
+            right: -18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-light);
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        .phase:last-child::after { display: none; }
+
+        .phase .phase-num {
+            font-family: var(--font-display);
+            font-size: 0.65em;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+        }
+
+        .phase .phase-icon { font-size: 1.8em; margin: 0.3em 0; }
+
+        .phase .phase-title {
+            font-family: var(--font-display);
+            font-size: 1.1em;
+            font-weight: 600;
+            color: var(--navy);
+        }
+
+        .phase .phase-desc {
+            font-size: 0.85em;
+            color: var(--text-muted);
+            margin-top: 0.3em;
+        }
+
+        .phase.highlight {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-primary);
+        }
+
+        .phase.highlight .phase-num,
+        .phase.highlight .phase-title,
+        .phase.highlight .phase-desc { color: white; }
+
+        /* 팀 상세 */
+        .team-detail {
+            background: var(--bg-elevated);
+            border-radius: var(--radius-xl);
+            padding: 28px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-md);
+        }
+
+        .team-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 1.2em;
+            padding-bottom: 1em;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .team-header .icon { font-size: 2.5em; }
+        .team-header .name {
+            font-family: var(--font-display);
+            font-size: 1.7em;
+            font-weight: 700;
+            color: var(--navy);
+        }
+        .team-header .count {
+            margin-left: auto;
+            background: var(--primary-50);
+            color: var(--primary);
+            padding: 8px 16px;
+            border-radius: var(--radius-xl);
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        .members {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 1em 0;
+        }
+
+        .member {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            padding: 8px 14px;
+            border-radius: var(--radius-sm);
+            font-size: 1em;
+        }
+
+        .member .role {
+            color: var(--text-muted);
+            font-size: 0.85em;
+        }
+
+        .tech-stack {
+            display: flex;
+            gap: 8px;
+            margin-top: 1em;
+        }
+
+        .tech-tag {
+            background: var(--primary-50);
+            color: var(--primary);
+            padding: 5px 12px;
+            border-radius: var(--radius-sm);
+            font-size: 0.78em;
+            font-weight: 600;
+        }
+
+        /* 검증 플로우 */
+        .verify-flow {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 1.5em 0;
+            flex-wrap: wrap;
+        }
+
+        .verify-step {
+            flex: 1;
+            min-width: 120px;
+            background: var(--bg-elevated);
+            padding: 18px;
+            border-radius: var(--radius-md);
+            text-align: center;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .verify-step.pass {
+            background: var(--bg-elevated);
+            border-color: var(--success);
+            border-left: 3px solid var(--success);
+        }
+
+        .verify-step.fail {
+            background: var(--bg-elevated);
+            border-color: var(--danger);
+            border-left: 3px solid var(--danger);
+        }
+
+        .verify-step .icon { font-size: 1.8em; margin-bottom: 0.3em; }
+        .verify-step .label { font-size: 0.95em; color: var(--text); font-weight: 500; }
+
+        /* KPI */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 1.5em 0;
+        }
+
+        .kpi-item {
+            background: var(--bg-elevated);
+            border-radius: var(--radius-lg);
+            padding: 28px 24px;
+            text-align: center;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .kpi-item .value {
+            font-family: var(--font-display);
+            font-size: 2.6em;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+
+        .kpi-item .label {
+            font-size: 0.85em;
+            color: var(--text-muted);
+            margin-top: 0.5em;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 500;
+        }
+
+        /* 2단 레이아웃 */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 36px;
+            margin: 1.5em 0;
+        }
+
+        .col-title {
+            font-family: var(--font-display);
+            font-size: 0.75em;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 1em;
+            padding-bottom: 0.5em;
+            border-bottom: 2px solid var(--border);
+        }
+
+        /* 터미널 */
+        .terminal {
+            background: var(--terminal-bg);
+            border-radius: var(--radius-lg);
+            margin: 1.5em 0;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .terminal-header {
+            background: var(--terminal-header);
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .terminal-header .dot {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+        }
+
+        .terminal-header .dot.red { background: #ff5f57; }
+        .terminal-header .dot.yellow { background: #febc2e; }
+        .terminal-header .dot.green { background: #28c840; }
+
+        .terminal-body {
+            padding: 20px;
+            font-family: var(--font-mono);
+            font-size: 0.88em;
+            line-height: 1.8;
+            color: #c9d1d9;
+        }
+
+        .terminal-body .prompt { color: #3fb950; }
+        .terminal-body .cmd { color: #79c0ff; }
+        .terminal-body .comment { color: #484f58; }
+
+        /* 테이블 */
+        .reveal table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5em 0;
+            font-size: 1em;
+        }
+
+        .reveal table thead {
+            background: transparent;
+        }
+
+        .reveal table th {
+            font-family: var(--font-display);
+            padding: 12px 16px;
+            font-weight: 600;
+            font-size: 0.8em;
+            text-align: left;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .reveal table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-light);
+        }
+
+        .reveal table code {
+            background: var(--primary-50);
+            color: var(--primary);
+            padding: 3px 10px;
+            border-radius: var(--radius-sm);
+            font-family: var(--font-mono);
+            font-size: 0.88em;
+            font-weight: 500;
+        }
+
+        /* 확장성 박스 */
+        .scale-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            margin: 1.5em 0;
+        }
+
+        .scale-item {
+            background: var(--bg-elevated);
+            border-radius: var(--radius-lg);
+            padding: 24px 16px;
+            text-align: center;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+        }
+
+        .scale-item:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .scale-item .icon { font-size: 2.2em; margin-bottom: 0.4em; }
+        .scale-item .title {
+            font-family: var(--font-display);
+            font-size: 1.1em;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 0.2em;
+        }
+        .scale-item .desc {
+            font-size: 0.9em;
+            color: var(--text-muted);
+            line-height: 1.45;
+        }
+
+        /* 인용구 */
+        .quote {
+            background: var(--bg-elevated);
+            border-left: 3px solid var(--primary);
+            padding: 28px 32px;
+            margin: 1.5em 0;
+            border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+        }
+
+        .quote::before {
+            content: '\201C';
+            position: absolute;
+            top: 8px;
+            left: 20px;
+            font-size: 3em;
+            color: var(--primary-100);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .quote p {
+            font-size: 1.5em;
+            font-weight: 500;
+            color: var(--navy);
+            line-height: 1.5;
+            padding-left: 20px;
+        }
+
+        .quote .highlight { color: var(--primary); }
+
+        /* 엔딩 - Pastel Gradient */
+        .ending-slide {
+            display: flex !important;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center !important;
+            background: transparent !important;
+            position: relative;
+            padding: 0 !important;
+            height: 720px !important;
+        }
+
+        .ending-slide h2 {
+            font-family: var(--font-display);
+            font-size: 4.5em;
+            font-weight: 800;
+            margin-bottom: 0.25em;
+            letter-spacing: -0.03em;
+            position: relative;
+            z-index: 1;
+            color: var(--navy);
+        }
+
+        .ending-slide .tagline {
+            font-size: 1.3em;
+            color: var(--text-light);
+            max-width: 600px;
+            line-height: 1.7;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 이미지 호버 강조 */
+        .img-hover-zoom {
+            transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out);
+            cursor: pointer;
+        }
+
+        .img-hover-zoom:hover {
+            transform: scale(1.02);
+            box-shadow: var(--shadow-xl) !important;
+        }
+
+        /* 이미지 전체화면 오버레이 */
+        .img-fullscreen-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(15, 27, 61, 0.9);
+            backdrop-filter: blur(8px);
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: zoom-out;
+        }
+
+        .img-fullscreen-overlay img {
+            max-width: 92vw;
+            max-height: 92vh;
+            object-fit: contain;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-xl);
+        }
+
+        /* Fragment 애니메이션 */
+        .reveal .fragment.fade-up {
+            transform: translateY(24px);
+            opacity: 0;
+            transition: transform 0.5s var(--ease-out), opacity 0.5s var(--ease-out);
+        }
+
+        .reveal .fragment.fade-up.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .reveal .fragment.stagger-1 { transition-delay: 0.08s; }
+        .reveal .fragment.stagger-2 { transition-delay: 0.16s; }
+        .reveal .fragment.stagger-3 { transition-delay: 0.24s; }
+
+        /* 페이지 번호 */
+        .reveal .slide-number {
+            font-family: var(--font-mono);
+            background: transparent;
+            color: var(--text-muted);
+            font-size: 12px;
+            font-weight: 500;
+            padding: 10px 16px;
+            right: 0;
+            top: 0;
+            bottom: auto;
+        }
+
+        .reveal .progress { background: var(--border); height: 2px; }
+        .reveal .progress span { background: var(--primary); transition: width 0.4s var(--ease-out); }
+
+        /* 인포 박스 */
+        .info-box {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--primary);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 18px 20px;
+            margin: 1em 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .info-box.success {
+            border-left-color: var(--success);
+        }
+
+        .info-box.warning {
+            border-left-color: var(--warning);
+        }
+
+        .info-box.danger {
+            border-left-color: var(--danger);
+        }
+
+        .info-box .title {
+            font-family: var(--font-display);
+            font-size: 1.1em;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 0.25em;
+        }
+
+        .info-box .desc {
+            font-size: 1em;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+
+        /* 유틸리티 클래스 */
+        .text-primary { color: var(--primary) !important; }
+        .text-success { color: var(--success) !important; }
+        .text-navy { color: var(--navy) !important; }
+        .text-muted { color: var(--text-muted) !important; }
+        .text-center { text-align: center !important; }
+        .font-semibold { font-weight: 600 !important; }
+        .font-mono { font-family: var(--font-mono) !important; }
+        .mt-1 { margin-top: 1em !important; }
+        .mt-2 { margin-top: 1.5em !important; }
+        .mb-0 { margin-bottom: 0 !important; }
+        .mb-1 { margin-bottom: 1em !important; }
+        .mb-2 { margin-bottom: 1.5em !important; }
+        .gap-sm { gap: 10px !important; }
+        .gap-md { gap: 20px !important; }
+        .rounded { border-radius: var(--radius-md) !important; }
+
+        /* 반응형 디자인 */
+        @media (max-width: 1024px) {
+            .reveal .slides section { padding: 40px 56px; }
+            .reveal h1 { font-size: 2.8em; }
+            .reveal h2 { font-size: 2em; }
+            .card-grid { grid-template-columns: repeat(2, 1fr); }
+            .card-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+            .card-grid.cols-4 { grid-template-columns: repeat(2, 1fr); }
+            .scale-grid { grid-template-columns: repeat(2, 1fr); }
+            .phases { flex-wrap: wrap; }
+            .phase { min-width: 45%; }
+            .phase::after { display: none; }
+        }
+
+        @media (max-width: 768px) {
+            .reveal .slides section { padding: 28px 36px; }
+            .reveal h1 { font-size: 2.2em; }
+            .reveal h2 { font-size: 1.6em; }
+            .card-grid, .card-grid.cols-2, .card-grid.cols-3 { grid-template-columns: 1fr; }
+            .two-col { grid-template-columns: 1fr; gap: 16px; }
+            .kpi-grid { grid-template-columns: 1fr; }
+            .flow { flex-direction: column; }
+            .flow-arrow { transform: rotate(90deg); }
+        }
+
+        /* 접근성 개선 */
+        .reveal a:focus,
+        .reveal button:focus {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal .fragment { transition: none !important; }
+            .card { transition: none !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- 1. 표지 -->
+            <section class="title-slide" data-background-color="#090A0F">
+                <div id="stars-small" class="stars-layer" style="z-index: 0;"></div>
+                <div id="stars-medium" class="stars-layer" style="z-index: 0;"></div>
+                <div id="stars-big" class="stars-layer" style="z-index: 0;"></div>
+                <div style="position: relative; z-index: 1;">
+                    <div class="badge" style="background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.7); border-color: rgba(255,255,255,0.12);">AI AGENTIC ORGANIZATION</div>
+                    <h1 style="color: #fff;">AI 에이전틱 기반<br><span class="highlight" style="color: var(--primary-light);">제품 홍보</span> 조직</h1>
+                    <p class="subtitle" style="color: rgba(255,255,255,0.55);">
+                        7개 팀, 51명의 AI 에이전트가 구성하는<br>
+                        자동화 콘텐츠 파이프라인
+                    </p>
+                    <div class="meta" style="color: rgba(255,255,255,0.35);">메디솔브 선행기술팀 · 최원</div>
+                </div>
+            </section>
+
+            <!-- 1.5 소개 영상 -->
+            <section data-background-color="#000000" style="padding: 0 !important; display: flex !important; justify-content: center; align-items: center;">
+                <video controls style="max-width: 100%; max-height: 100%; border-radius: 8px;">
+                    <source src="introduction.mp4" type="video/mp4">
+                </video>
+            </section>
+
+            <!-- 1.6 영상 제작 과정 소개 -->
+            <section>
+                <h3>DEMO</h3>
+                <h2>명령어 <span style="color: var(--primary);">8줄</span>로 만든 홍보 영상</h2>
+                <div class="terminal fragment fade-up" style="margin: 1em 0;">
+                    <div class="terminal-header">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                        <span style="color: #94a3b8; font-size: 0.8em; margin-left: 8px;">Claude Code</span>
+                    </div>
+                    <div class="terminal-body" style="font-size: 1.15em; line-height: 2.2;">
+                        <span class="prompt">1 ›</span> <span class="cmd">remotion으로 claude code 홍보 영상 만들어줘</span><br>
+                        <span class="prompt">2 ›</span> <span class="cmd">report.html 이 내용을 바탕으로 소개영상 만들어줘</span><br>
+                        <span class="prompt">3 ›</span> <span class="cmd">checkValidInputRange…</span> <span class="comment"># 에러 수정 요청</span><br>
+                        <span class="prompt">4 ›</span> <span class="cmd">적절한 대사 넣어서 나레이션 음성 클로닝해줘</span><br>
+                        <span class="prompt">5 ›</span> <span class="cmd">나레이션은 한 번에 뽑아</span><br>
+                        <span class="prompt">6 ›</span> <span class="cmd">전체 문장을 한 번에 클로닝해</span><br>
+                        <span class="prompt">7 ›</span> <span class="cmd">자막 좀 더 크게</span><br>
+                        <span class="prompt">8 ›</span> <span class="cmd">mp4로 뽑아줘</span>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 15px; margin-top: 1em;" class="fragment fade-up">
+                    <div class="info-box" style="flex: 1;">
+                        <div class="title">🎬 Remotion</div>
+                        <div class="desc">React 기반 영상 프레임워크</div>
+                    </div>
+                    <div class="info-box" style="flex: 1;">
+                        <div class="title">🗣️ Qwen3-TTS</div>
+                        <div class="desc">음성 클로닝으로 나레이션 자동 생성</div>
+                    </div>
+                    <div class="info-box success" style="flex: 1;">
+                        <div class="title">✅ 결과</div>
+                        <div class="desc">기획 → 영상 → 나레이션 → 자막 → 렌더링</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 1.7 프랑스어 버전 -->
+            <section style="padding-top: 30px !important;">
+                <h3>LOCALIZATION</h3>
+                <h2 style="margin-bottom: 0.4em;">명령어 <span style="color: var(--primary);">2줄</span>로 프랑스어 버전 제작</h2>
+                <div class="terminal fragment fade-up" style="margin: 1em 0;">
+                    <div class="terminal-header">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                        <span style="color: #94a3b8; font-size: 0.8em; margin-left: 8px;">Claude Code</span>
+                    </div>
+                    <div class="terminal-body" style="font-size: 1.15em; line-height: 2.4;">
+                        <span class="prompt">1 ›</span> <span class="cmd">프랑스어 버전으로 목소리랑, 자막 넣어서 하나 만들어줘</span><br>
+                        <span class="prompt">2 ›</span> <span class="cmd">한글도 프랑스어로 변경</span>
+                    </div>
+                </div>
+                <div class="two-col fragment fade-up" style="margin-top: 1em;">
+                    <div class="info-box" style="flex: 1;">
+                        <div class="title">🇰🇷 → 🇫🇷 자동 현지화</div>
+                        <div class="desc">나레이션, 자막, UI 텍스트를 프랑스어로 자동 변환</div>
+                    </div>
+                    <div class="info-box success" style="flex: 1;">
+                        <div class="title">⚡ 단 2줄</div>
+                        <div class="desc">8줄로 만든 원본 영상을 2줄 추가만으로 다국어 버전 완성</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 1.8 프랑스어 영상 재생 -->
+            <section data-background-color="#000000" style="padding: 0 !important; display: flex !important; justify-content: center; align-items: center;">
+                <video controls style="max-width: 100%; max-height: 100%; border-radius: 8px;">
+                    <source src="video_fr.mp4" type="video/mp4">
+                </video>
+            </section>
+
+            <!-- 2. Claude Code vs GPT 비교 -->
+            <section style="padding-top: 30px !important;">
+                <h3>COMPARISON</h3>
+                <h2 style="margin-bottom: 0.4em;">ChatGPT <span style="color: var(--text-muted);">vs</span> Claude Code</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 0.5em;">
+                    <div class="fragment fade-up stagger-1">
+                        <div class="col-title" style="border-color: var(--text-muted); color: var(--text-muted);">ChatGPT · GUI</div>
+                        <div class="img-hover-zoom" style="border-radius: 10px; overflow: hidden; border: 2px solid var(--border); height: 280px;">
+                            <img src="gpt.png" alt="ChatGPT GUI" style="width: 100%; display: block; object-fit: cover; object-position: top; height: 100%;">
+                        </div>
+                        <div style="margin-top: 0.6em; font-size: 0.95em; color: var(--text-light); line-height: 1.6;">
+                            <span class="font-semibold">인터넷 브라우저에서 사용</span> · 채팅 방식<br>
+                            무엇이든 질문 가능 · 파일 첨부로 분석
+                        </div>
+                    </div>
+                    <div class="fragment fade-up stagger-2">
+                        <div class="col-title">Claude Code · 터미널</div>
+                        <div class="img-hover-zoom" style="border-radius: 10px; overflow: hidden; border: 2px solid var(--primary); box-shadow: 0 4px 16px rgba(66,134,248,0.15); height: 280px;">
+                            <img src="claude code.png" alt="Claude Code CLI" style="width: 100%; display: block; object-fit: cover; object-position: top; height: 100%;">
+                        </div>
+                        <div style="margin-top: 0.6em; font-size: 0.95em; color: var(--text-light); line-height: 1.6;">
+                            <span class="text-primary font-semibold">내 컴퓨터에서 직접 실행</span> · 파일 읽기/쓰기<br>
+                            외부 도구 연결 · 반복 작업 자동화
+                        </div>
+                    </div>
+                </div>
+                <div class="info-box fragment fade-up" style="margin-top: 0.8em;">
+                    <div class="title">💡 핵심 차이</div>
+                    <div class="desc">ChatGPT는 "대화 상대", Claude Code는 "일을 직접 해주는 비서" — 파일 만들기, 프로그램 실행, 외부 서비스 연결까지 알아서 처리합니다</div>
+                </div>
+            </section>
+
+            <!-- 3. Claude Code 환경설정 -->
+            <section style="padding-top: 30px !important;">
+                <h3>SETUP</h3>
+                <h2 style="margin-bottom: 0.2em;">Claude Code 환경설정</h2>
+                <p style="font-size: 1.1em; margin-bottom: 0.5em;">
+                    <a href="https://code.claude.com/docs" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: 600;">📖 code.claude.com/docs</a>
+                </p>
+                <div class="two-col fragment fade-up" style="margin-top: 0.5em;">
+                    <div>
+                        <div class="col-title">🍎 macOS / Linux / WSL</div>
+                        <div class="terminal" style="margin: 0;">
+                            <div class="terminal-header">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                                <span style="color: #94a3b8; font-size: 0.8em; margin-left: 8px;">Terminal</span>
+                            </div>
+                            <div class="terminal-body" style="font-size: 0.9em; line-height: 2.2;">
+                                <span class="comment"># 설치 + PATH 설정 (한 줄)</span><br>
+                                <span class="prompt">$</span> <span class="cmd">curl -fsSL https://claude.ai/install.sh | bash &amp;&amp; echo 'export PATH="$HOME/.local/bin:$PATH"' &gt;&gt; ~/.zshrc &amp;&amp; source ~/.zshrc</span><br>
+                                <span class="comment"># 실행 → 브라우저 로그인</span><br>
+                                <span class="prompt">$</span> <span class="cmd">cd ~ &amp;&amp; mkdir test &amp;&amp; cd test &amp;&amp; claude</span>
+                            </div>
+                        </div>
+                        <div class="info-box" style="margin-top: 0.8em;">
+                            <div class="title">요구사항</div>
+                            <div class="desc">macOS 13.0+ · 4GB RAM · Claude Pro/Max 구독</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-title">🪟 Windows</div>
+                        <div class="terminal" style="margin: 0;">
+                            <div class="terminal-header">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                                <span style="color: #94a3b8; font-size: 0.8em; margin-left: 8px;">PowerShell</span>
+                            </div>
+                            <div class="terminal-body" style="font-size: 0.9em; line-height: 2.2;">
+                                <span class="comment"># Git + Claude Code 설치</span><br>
+                                <span class="prompt">&gt;</span> <span class="cmd">winget install --id Git.Git -e --source winget;</span><br>
+                                <span class="prompt">&gt;</span> <span class="cmd">setx CLAUDE_CODE_GIT_BASH_PATH "C:₩Program Files₩Git₩bin₩bash.exe";</span><br>
+                                <span class="prompt">&gt;</span> <span class="cmd">winget install Anthropic.ClaudeCode;</span><br>
+                                <span class="comment"># 실행 → 브라우저 로그인</span><br>
+                                <span class="prompt">&gt;</span> <span class="cmd">cd ~; mkdir test; cd test; claude</span>
+                            </div>
+                        </div>
+                        <div class="info-box warning" style="margin-top: 0.8em;">
+                            <div class="title">요구사항</div>
+                            <div class="desc">Windows 10+ · PowerShell · Claude Pro/Max 구독</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. 터미널 기본 명령어 -->
+            <section style="padding-top: 30px !important;">
+                <h3>TERMINAL BASICS</h3>
+                <h2 style="margin-bottom: 0.4em;">터미널 기본 명령어</h2>
+                <div class="card-grid cols-3 fragment fade-up" style="margin-top: 0.5em;">
+                    <div class="card">
+                        <div class="card-title" style="font-family: var(--font-mono); color: var(--primary);">cd</div>
+                        <div class="card-desc">디렉토리 이동<br><span style="color: var(--text-muted); font-size: 0.9em;">Change Directory</span></div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title" style="font-family: var(--font-mono); color: var(--primary);">ls</div>
+                        <div class="card-desc">파일/폴더 목록 조회<br><span style="color: var(--text-muted); font-size: 0.9em;">List</span></div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title" style="font-family: var(--font-mono); color: var(--primary);">mkdir</div>
+                        <div class="card-desc">새 폴더 생성<br><span style="color: var(--text-muted); font-size: 0.9em;">Make Directory</span></div>
+                    </div>
+                </div>
+                <div class="terminal fragment fade-up" style="margin-top: 1em;">
+                    <div class="terminal-header">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                        <span style="color: #94a3b8; font-size: 0.8em; margin-left: 8px;">Terminal</span>
+                    </div>
+                    <div class="terminal-body" style="font-size: 1em; line-height: 2.2;">
+                        <span class="comment"># 프로젝트 폴더 생성</span><br>
+                        <span class="prompt">$</span> <span class="cmd">mkdir test</span><br>
+                        <span class="comment"># 폴더로 이동</span><br>
+                        <span class="prompt">$</span> <span class="cmd">cd test</span><br>
+                        <span class="comment"># Claude Code 실행</span><br>
+                        <span class="prompt">$</span> <span class="cmd">claude</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. Hello Claude Code -->
+            <section style="padding-top: 30px !important;">
+                <h3>HANDS-ON</h3>
+                <h2 style="margin-bottom: 0.4em;">Hello Claude Code</h2>
+                <p style="font-size: 1.15em; color: var(--text-light); margin-bottom: 0.8em;">첫 번째 명령어를 입력해보세요</p>
+                <div class="terminal fragment fade-up" style="margin: 0;">
+                    <div class="terminal-header">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                        <span style="color: #94a3b8; font-size: 0.8em; margin-left: 8px;">Claude Code</span>
+                    </div>
+                    <div class="terminal-body" style="font-size: 1.05em; line-height: 2.4;">
+                        <span style="color: #f97316;">›</span> <span class="cmd">https://companysc.com/ 분석해서 워드 파일로 정리 각 정보에 대한 출처 기입</span>
+                    </div>
+                </div>
+                <div class="two-col fragment fade-up" style="margin-top: 1em;">
+                    <div class="info-box">
+                        <div class="title">💬 자연어로 명령</div>
+                        <div class="desc">코드가 아닌 일상 언어로 원하는 작업을 요청하면 AI가 분석하고 실행합니다</div>
+                    </div>
+                    <div class="info-box success">
+                        <div class="title">🌐 웹사이트 분석</div>
+                        <div class="desc">URL을 전달하면 구조, 기술 스택, 콘텐츠를 자동으로 분석하여 리포트를 생성합니다</div>
+                    </div>
+                </div>
+                <div class="fragment fade-up" style="display: flex; justify-content: center; gap: 30px; margin-top: 0.8em; font-size: 1.1em;">
+                    <a href="The_SC_기업분석_보고서.docx" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: 600;">📄 결과물 보기 — WebFetch 버전</a>
+                    <a href="The_SC_기업분석_보고서_Hyperbrowser.docx" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: 600;">📄 결과물 보기 — Hyperbrowser 버전</a>
+                </div>
+            </section>
+
+            <!-- 5.6 조직도 실습 - PPT 제작 -->
+            <section style="padding-top: 25px !important;">
+                <h3>HANDS-ON · 조직도 생성</h3>
+                <h2 style="margin-bottom: 0.3em;">Example 1 — AI PPT 제작 조직</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 0.5em;">
+                    <div class="fragment fade-up stagger-1">
+                        <div class="col-title">프롬프트</div>
+                        <div class="img-hover-zoom" style="border-radius: 10px; overflow: hidden; border: 2px solid var(--primary); max-height: 420px;">
+                            <img src="org-5-ppt-prompt.png" alt="PPT 조직 프롬프트" style="width: 100%; display: block; object-fit: contain;">
+                        </div>
+                        <p style="font-size: 1.1em; color: var(--text-light); margin-top: 0.5em; line-height: 1.5; background: var(--bg-surface); padding: 8px 12px; border-radius: 8px;">› ppt 만드는 플러그인을 만들고 싶어 자료 조사팀, 이미지 생성팀, 문구 생성팀, 검토팀 네 개로. PPT 레퍼런스를 참고해서 템플릿을 유지할 수 있는 구조로 만들어줘. 이미지는 Nanobanana API를 사용</p>
+                    </div>
+                    <div class="fragment fade-up stagger-2">
+                        <div class="col-title">결과 — 조직도 (4팀 11명)</div>
+                        <div class="img-hover-zoom" style="border-radius: 10px; overflow: hidden; border: 2px solid var(--success); max-height: 420px;">
+                            <img src="org-4-ppt-chart.png" alt="PPT 조직도" style="width: 100%; display: block; object-fit: contain;">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5.7 조직도 실습 - 인원 추가 -->
+            <section style="padding-top: 25px !important;">
+                <h3>HANDS-ON · 인원 추가</h3>
+                <h2 style="margin-bottom: 0.3em;">"검토팀 최원 추가"</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 0.5em;">
+                    <div class="fragment fade-up stagger-1">
+                        <div class="col-title">명령어 입력</div>
+                        <div class="img-hover-zoom" style="border-radius: 10px; overflow: hidden; border: 2px solid var(--primary);">
+                            <img src="org-6-add-member.png" alt="최원 추가 명령" style="width: 100%; display: block;">
+                        </div>
+                        <p style="font-size: 1.1em; color: var(--text-light); margin-top: 0.5em; line-height: 1.5; background: var(--bg-surface); padding: 8px 12px; border-radius: 8px;">› 검토팀 최원 추가</p>
+                    </div>
+                    <div class="fragment fade-up stagger-2">
+                        <div class="col-title">역할 자동 질문</div>
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <div class="img-hover-zoom" style="border-radius: 10px; overflow: hidden; border: 2px solid var(--warning);">
+                                <img src="org-8-question1.png" alt="역할 질문 1" style="width: 100%; display: block;">
+                            </div>
+                            <div class="img-hover-zoom" style="border-radius: 10px; overflow: hidden; border: 2px solid var(--warning);">
+                                <img src="org-9-question2.png" alt="역할 질문 2" style="width: 100%; display: block;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5.9 조직도 실습 - 업데이트 결과 -->
+            <section style="padding-top: 25px !important;">
+                <h3>HANDS-ON · 결과</h3>
+                <h2 style="margin-bottom: 0.3em;">조직도 자동 업데이트</h2>
+                <div class="fragment fade-up" style="margin-top: 0.5em;">
+                    <div class="img-hover-zoom" style="border-radius: 10px; overflow: hidden; border: 2px solid var(--success); max-width: 70%; max-height: 400px; margin: 0 auto;">
+                        <img src="org-7-updated-chart.png" alt="업데이트된 조직도" style="width: 100%; display: block; object-fit: contain;">
+                    </div>
+                </div>
+                <div class="info-box success fragment fade-up" style="margin-top: 0.8em;">
+                    <div class="title">⚡ 한 줄 명령으로 조직 변경</div>
+                    <div class="desc">인원 추가 → 역할 질문 → 조직도·워크플로우·설정 파일 6개 자동 업데이트</div>
+                </div>
+            </section>
+
+            <!-- 5.9 조직도 실습 - 제품 홍보 -->
+            <section style="padding-top: 25px !important;">
+                <h3>HANDS-ON · 조직도 생성</h3>
+                <h2 style="margin-bottom: 0.3em;">Example 2 — AI 제품 홍보 조직</h2>
+                <div class="fragment fade-up" style="margin-top: 0.5em;">
+                    <div class="img-hover-zoom" style="border-radius: 10px; overflow: hidden; border: 2px solid var(--success); max-height: 420px; margin: 0 auto;">
+                        <img src="org-3-promo-chart.png" alt="제품 홍보 조직도" style="width: 100%; height: 420px; display: block; object-fit: cover; object-position: top;">
+                    </div>
+                </div>
+                <p class="fragment fade-up" style="text-align: center; margin-top: 0.6em; font-size: 1.2em; font-weight: 600; color: var(--navy);">
+                    7개 팀 · <span style="color: var(--primary);">51명</span>의 AI 에이전트
+                </p>
+            </section>
+
+            <!-- 6. 다국어 영상 결과물 -->
+            <section style="padding-top: 25px !important;">
+                <h3>MULTILINGUAL OUTPUT</h3>
+                <h2 style="margin-bottom: 0.3em;">10개 언어 자동 생성 영상</h2>
+                <p style="font-size: 1em; color: var(--text-light); margin-bottom: 0.6em;"><code style="background: var(--primary-50); color: var(--primary); padding: 4px 10px; border-radius: 4px; font-size: 0.9em;">.promo-company/outputs/video/final/</code></p>
+                <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 0.5em;" class="fragment fade-up">
+                    <div style="text-align: center;">
+                        <video controls muted style="width: 100%; border-radius: 8px; border: 1px solid var(--border);"><source src="video-1-ko.mp4" type="video/mp4"></video>
+                        <div style="font-size: 0.85em; font-weight: 600; margin-top: 4px;">🇰🇷 한국어</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <video controls muted style="width: 100%; border-radius: 8px; border: 1px solid var(--border);"><source src="video-1-en.mp4" type="video/mp4"></video>
+                        <div style="font-size: 0.85em; font-weight: 600; margin-top: 4px;">🇺🇸 English</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <video controls muted style="width: 100%; border-radius: 8px; border: 1px solid var(--border);"><source src="video-1-fr.mp4" type="video/mp4"></video>
+                        <div style="font-size: 0.85em; font-weight: 600; margin-top: 4px;">🇫🇷 Francais</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <video controls muted style="width: 100%; border-radius: 8px; border: 1px solid var(--border);"><source src="video-1-ja.mp4" type="video/mp4"></video>
+                        <div style="font-size: 0.85em; font-weight: 600; margin-top: 4px;">🇯🇵 日本語</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <video controls muted style="width: 100%; border-radius: 8px; border: 1px solid var(--border);"><source src="video-1-zh.mp4" type="video/mp4"></video>
+                        <div style="font-size: 0.85em; font-weight: 600; margin-top: 4px;">🇨🇳 中文</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <video controls muted style="width: 100%; border-radius: 8px; border: 1px solid var(--border);"><source src="video-1-es.mp4" type="video/mp4"></video>
+                        <div style="font-size: 0.85em; font-weight: 600; margin-top: 4px;">🇪🇸 Espanol</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <video controls muted style="width: 100%; border-radius: 8px; border: 1px solid var(--border);"><source src="video-1-de.mp4" type="video/mp4"></video>
+                        <div style="font-size: 0.85em; font-weight: 600; margin-top: 4px;">🇩🇪 Deutsch</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <video controls muted style="width: 100%; border-radius: 8px; border: 1px solid var(--border);"><source src="video-1-pt.mp4" type="video/mp4"></video>
+                        <div style="font-size: 0.85em; font-weight: 600; margin-top: 4px;">🇧🇷 Portugues</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <video controls muted style="width: 100%; border-radius: 8px; border: 1px solid var(--border);"><source src="video-1-it.mp4" type="video/mp4"></video>
+                        <div style="font-size: 0.85em; font-weight: 600; margin-top: 4px;">🇮🇹 Italiano</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <video controls muted style="width: 100%; border-radius: 8px; border: 1px solid var(--border);"><source src="video-1-ru.mp4" type="video/mp4"></video>
+                        <div style="font-size: 0.85em; font-weight: 600; margin-top: 4px;">🇷🇺 Русский</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7. 에이전트 팀 기능 -->
+            <section style="padding-top: 25px !important;">
+                <h3>AGENT TEAMS</h3>
+                <h2 style="margin-bottom: 0.3em;">에이전트 팀 기능 <span style="font-size: 0.5em; color: #e74c3c; font-weight: 600; vertical-align: middle;">2026.02.06 출시</span></h2>
+                <p style="font-size: 1em; color: var(--text-light); margin-bottom: 0.6em;">여러 Claude Code 인스턴스가 <span class="text-primary font-semibold">팀으로 협업</span>합니다</p>
+                <table class="fragment fade-up" style="font-size: 0.95em;">
+                    <thead>
+                        <tr>
+                            <th>구성 요소</th>
+                            <th>역할</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>팀 리더</strong></td>
+                            <td>팀 생성, 작업 조율, 결과 종합</td>
+                        </tr>
+                        <tr>
+                            <td><strong>팀원</strong></td>
+                            <td>각자 독립적 컨텍스트에서 할당된 작업 수행</td>
+                        </tr>
+                        <tr>
+                            <td><strong>작업 목록</strong></td>
+                            <td>공유 Task로 진행 상황 추적 및 자동 할당</td>
+                        </tr>
+                        <tr>
+                            <td><strong>메일박스</strong></td>
+                            <td>팀원 간 직접 메시징 · 브로드캐스트</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="terminal fragment fade-up" style="margin-top: 0.8em;">
+                    <div class="terminal-header">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                        <span style="color: #94a3b8; font-size: 0.8em; margin-left: 8px;">Claude Code</span>
+                    </div>
+                    <div class="terminal-body" style="font-size: 0.9em; line-height: 2;">
+                        <span class="comment"># 에이전트 팀 활성화</span><br>
+                        <span class="prompt">›</span> <span class="cmd">settings.json → "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"</span><br>
+                        <span class="comment"># 자연어로 팀 생성</span><br>
+                        <span class="prompt">›</span> <span class="cmd">조사팀 3명, 검증팀 2명으로 에이전트 팀을 만들어줘</span>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: center; gap: 15px; margin-top: 0.6em;">
+                    <a href="https://code.claude.com/docs/ko/agent-teams" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: 600; font-size: 1em;">📖 code.claude.com/docs/ko/agent-teams</a>
+                    <span style="font-size: 0.9em; color: var(--text-muted);">← 문서 내용을 Claude Code 터미널에 그대로 붙여넣기하면 적용됩니다</span>
+                </div>
+            </section>
+
+            <!-- 7.5 Claude Code Plugin & Skills -->
+            <section style="padding: 0 !important;">
+                <div class="scroll-wrapper" style="height: 720px; overflow-y: auto; padding: 25px 88px 80px 88px;">
+                <h3>PLUGINS & SKILLS</h3>
+                <h2 style="margin-bottom: 0.3em;">Claude <span style="color: var(--primary);">Skills</span> & Plugin 시스템</h2>
+                <p style="font-size: 1em; color: var(--text-light); margin-bottom: 0.6em;">지침·스크립트·리소스를 폴더로 묶어 AI의 전문 능력을 확장하는 시스템</p>
+                <div class="card-grid cols-4 fragment fade-up" style="margin-top: 0.5em;">
+                    <div class="card" style="border-top: 3px solid var(--primary);">
+                        <div class="card-title">Skills</div>
+                        <div class="card-desc">지침+코드 폴더 단위<br>AI가 맥락에 맞게 <strong>자동 호출</strong><br><span style="font-size: 0.85em; color: var(--text-muted);">Excel, PPT, Word, PDF 등</span></div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">Subagents</div>
+                        <div class="card-desc">특화된 AI 에이전트<br>(보안 감사, UI 개발 등)</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">MCP Servers</div>
+                        <div class="card-desc">외부 서비스 연동<br>(Linear, Slack 등)</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">Hooks</div>
+                        <div class="card-desc">이벤트 기반<br>자동 실행 핸들러</div>
+                    </div>
+                </div>
+                <div class="two-col fragment fade-up" style="margin-top: 0.8em;">
+                    <div>
+                        <div class="col-title">Skills 핵심 특성</div>
+                        <div class="numbered-list" style="margin: 0;">
+                            <div class="numbered-item" style="padding: 8px 0;">
+                                <div class="num">1</div>
+                                <div class="content">
+                                    <div class="title">합성 가능 (Composable)</div>
+                                    <div class="desc">여러 Skills를 스택 — AI가 자동으로 조합</div>
+                                </div>
+                            </div>
+                            <div class="numbered-item" style="padding: 8px 0;">
+                                <div class="num">2</div>
+                                <div class="content">
+                                    <div class="title">이식성 (Portable)</div>
+                                    <div class="desc">Claude 앱 · API · Code 어디서든 동일 포맷</div>
+                                </div>
+                            </div>
+                            <div class="numbered-item" style="padding: 8px 0;">
+                                <div class="num">3</div>
+                                <div class="content">
+                                    <div class="title">효율적 (Efficient)</div>
+                                    <div class="desc">필요한 순간에 필요한 것만 로드</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-title">사용 예시</div>
+                        <div class="terminal" style="margin: 0;">
+                            <div class="terminal-header">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                                <span style="color: #484f58; font-size: 0.8em; margin-left: 8px;">Claude Code</span>
+                            </div>
+                            <div class="terminal-body" style="font-size: 0.85em; line-height: 2;">
+                                <span class="comment"># 플러그인 설치</span><br>
+                                <span class="prompt">›</span> <span class="cmd">/plugin install code-review</span><br>
+                                <span class="comment"># Skill 자동 호출 (맥락 기반)</span><br>
+                                <span class="prompt">›</span> <span class="cmd">이 데이터를 Excel로 정리해줘</span><br>
+                                <span class="comment"># 슬래시 커맨드로 직접 호출</span><br>
+                                <span class="prompt">›</span> <span class="cmd">/code-review:review PR #42 검토해줘</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 15px; margin-top: 0.6em;" class="fragment fade-up">
+                    <div class="info-box" style="flex: 1;">
+                        <div class="title">📦 플러그인 구조</div>
+                        <div class="desc"><code style="font-family: var(--font-mono); background: var(--primary-50); color: var(--primary); padding: 2px 6px; border-radius: 4px;">.claude-plugin/plugin.json</code> + skills/ + agents/ + hooks/</div>
+                    </div>
+                    <div class="info-box success" style="flex: 1;">
+                        <div class="title">🏪 Marketplace & Partners</div>
+                        <div class="desc">Box, Canva 등 파트너 Skills 디렉터리 + 커뮤니티 배포</div>
+                    </div>
+                </div>
+                <div class="fragment fade-up" style="margin-top: 0.6em; text-align: center;">
+                    <a href="https://claude.com/blog/skills" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: 600; font-size: 1em;">📖 claude.com/blog/skills — 공식 Skills 블로그</a>
+                </div>
+                </div>
+            </section>
+
+            <!-- 7.6 프롬프트를 파일로, 팀으로 -->
+            <section style="padding-top: 25px !important;">
+                <h3>PROMPT AS CODE</h3>
+                <h2 style="margin-bottom: 0.3em;">프롬프트를 <span style="color: var(--primary);">파일</span>로, <span style="color: var(--primary);">팀</span>으로 관리</h2>
+                <p style="font-size: 1em; color: var(--text-light); margin-bottom: 0.6em;">프롬프트가 코드처럼 버전 관리되고, 팀 전체에 일관되게 적용됩니다</p>
+                <div class="two-col fragment fade-up" style="margin-top: 0.5em;">
+                    <div>
+                        <div class="col-title">📁 프로젝트 디렉토리 구조</div>
+                        <div class="terminal" style="margin: 0;">
+                            <div class="terminal-header">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                                <span style="color: #484f58; font-size: 0.8em; margin-left: 8px;">.claude/</span>
+                            </div>
+                            <div class="terminal-body" style="font-size: 0.85em; line-height: 2;">
+                                <span style="color: #484f58;">📄</span> <span style="color: #79c0ff;">CLAUDE.md</span> <span class="comment"># 프로젝트 지침서</span><br>
+                                <span style="color: #484f58;">📂</span> <span style="color: #3fb950;">commands/</span> <span class="comment"># 슬래시 커맨드</span><br>
+                                <span style="color: #484f58;">  └─</span> <span style="color: #79c0ff;">review.md</span> <span class="comment"># /review</span><br>
+                                <span style="color: #484f58;">📂</span> <span style="color: #3fb950;">agents/</span> <span class="comment"># 커스텀 에이전트</span><br>
+                                <span style="color: #484f58;">  └─</span> <span style="color: #79c0ff;">qa-tester.md</span><br>
+                                <span style="color: #484f58;">📂</span> <span style="color: #3fb950;">skills/</span> <span class="comment"># 자동 실행 스킬</span><br>
+                                <span style="color: #484f58;">📄</span> <span style="color: #79c0ff;">settings.json</span> <span class="comment"># 팀 공유 설정</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-title">💡 핵심 개념</div>
+                        <div class="numbered-list" style="margin: 0;">
+                            <div class="numbered-item" style="padding: 12px 0;">
+                                <div class="num">1</div>
+                                <div class="content">
+                                    <div class="title">프롬프트 = 마크다운 파일</div>
+                                    <div class="desc">복잡한 지시사항을 <code style="font-family: var(--font-mono); background: var(--primary-50); color: var(--primary); padding: 2px 6px; border-radius: 4px;">.md</code> 파일로 저장하고 재사용</div>
+                                </div>
+                            </div>
+                            <div class="numbered-item" style="padding: 12px 0;">
+                                <div class="num">2</div>
+                                <div class="content">
+                                    <div class="title">Git으로 버전 관리</div>
+                                    <div class="desc">프롬프트 변경 이력 추적, PR 리뷰 가능</div>
+                                </div>
+                            </div>
+                            <div class="numbered-item" style="padding: 12px 0;">
+                                <div class="num">3</div>
+                                <div class="content">
+                                    <div class="title">팀 전체에 동일 적용</div>
+                                    <div class="desc">레포에 커밋하면 팀원 모두 같은 지침 사용</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="quote fragment fade-up" style="margin-top: 0.6em;">
+                    <p style="font-size: 1.2em;">"좋은 프롬프트는 <span class="highlight">팀의 자산</span>입니다. 파일로 관리하면 축적되고, 공유하면 <span class="highlight">조직의 역량</span>이 됩니다."</p>
+                </div>
+            </section>
+
+            <!-- Q&A -->
+            <section class="ending-slide" data-background-gradient="linear-gradient(135deg, #ffe8f3, #d9f3ff)">
+                <h2>Q&A</h2>
+                <p class="tagline">
+                    AI 적용 및 도입에 대해<br>
+                    궁금한 점을 자유롭게 질문해주세요
+                </p>
+                <p style="margin-top: 2.5em; font-size: 1.15em; color: var(--text-muted); font-family: var(--font-mono); letter-spacing: 0.02em; position: relative; z-index: 1;">
+                    alyduho@medisolveai.com
+                </p>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/plugin/highlight/highlight.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: 'c/t',
+            showSlideNumber: 'all',
+            transition: 'fade',
+            transitionSpeed: 'default',
+            plugins: [ RevealHighlight ],
+            width: 1280,
+            height: 720,
+            margin: 0,
+            controls: true,
+            progress: true,
+            center: false,
+        });
+
+        // 슬라이드별 뷰포트 배경색 동적 변경
+        function updateViewportBg() {
+            var slide = Reveal.getCurrentSlide();
+            var bgGradient = slide && slide.getAttribute('data-background-gradient');
+            var bgColor = slide && slide.getAttribute('data-background-color');
+            var vp = document.querySelector('.reveal-viewport');
+            if (bgGradient) {
+                vp.style.background = bgGradient;
+            } else {
+                vp.style.background = bgColor || 'var(--bg)';
+            }
+        }
+        Reveal.on('slidechanged', updateViewportBg);
+        Reveal.on('ready', updateViewportBg);
+
+        // 이미지 클릭 전체화면
+        document.querySelectorAll('.img-hover-zoom').forEach(el => {
+            el.addEventListener('click', function() {
+                const img = this.querySelector('img');
+                if (!img) return;
+                const overlay = document.createElement('div');
+                overlay.className = 'img-fullscreen-overlay';
+                const fullImg = document.createElement('img');
+                fullImg.src = img.src;
+                overlay.appendChild(fullImg);
+                overlay.addEventListener('click', () => overlay.remove());
+                document.body.appendChild(overlay);
+            });
+        });
+
+        // Parallax Stars 생성
+        (function() {
+            function generateShadows(n) {
+                var shadows = [];
+                for (var i = 0; i < n; i++) {
+                    shadows.push(Math.floor(Math.random() * 2000) + 'px ' + Math.floor(Math.random() * 2000) + 'px #FFF');
+                }
+                return shadows.join(', ');
+            }
+
+            var small = generateShadows(700);
+            var medium = generateShadows(200);
+            var big = generateShadows(100);
+
+            var s1 = document.getElementById('stars-small');
+            var s2 = document.getElementById('stars-medium');
+            var s3 = document.getElementById('stars-big');
+
+            if (s1) { s1.style.boxShadow = small; }
+            if (s2) { s2.style.boxShadow = medium; }
+            if (s3) { s3.style.boxShadow = big; }
+
+            // ::after에도 같은 shadow 적용 (CSS에서는 JS로 직접 못 하므로 style 태그 추가)
+            var style = document.createElement('style');
+            style.textContent = '#stars-small::after { box-shadow: ' + small + '; }' +
+                '#stars-medium::after { box-shadow: ' + medium + '; }' +
+                '#stars-big::after { box-shadow: ' + big + '; }';
+            document.head.appendChild(style);
+        })();
+    </script>
+</body>
+</html>
