@@ -1481,84 +1481,39 @@
                 <div class="scroll-wrapper" style="height: 720px; overflow-y: auto; padding: 25px 88px 80px 88px;">
                 <h3>PLUGINS & SKILLS</h3>
                 <h2 style="margin-bottom: 0.3em;">Claude <span style="color: var(--primary);">Skills</span> & Plugin 시스템</h2>
-                <p style="font-size: 1em; color: var(--text-light); margin-bottom: 0.6em;">지침·스크립트·리소스를 폴더로 묶어 AI의 전문 능력을 확장하는 시스템</p>
+                <p style="font-size: 1em; color: var(--text-light); margin-bottom: 0.6em;">스마트폰에 앱을 설치하듯, AI에게 새로운 능력을 추가하는 시스템</p>
                 <div class="card-grid cols-4 fragment fade-up" style="margin-top: 0.5em;">
                     <div class="card" style="border-top: 3px solid var(--primary);">
                         <div class="card-title">Skills</div>
-                        <div class="card-desc">지침+코드 폴더 단위<br>AI가 맥락에 맞게 <strong>자동 호출</strong><br><span style="font-size: 0.85em; color: var(--text-muted);">Excel, PPT, Word, PDF 등</span></div>
+                        <div class="card-desc"><strong>프롬프트 파일</strong> 묶음<br>상황에 맞게 자동으로 작동<br><a href="music.md" target="_blank" style="font-size: 0.85em; color: var(--primary); text-decoration: underline;">예시 보기 →</a></div>
                     </div>
                     <div class="card">
-                        <div class="card-title">Subagents</div>
-                        <div class="card-desc">특화된 AI 에이전트<br>(보안 감사, UI 개발 등)</div>
+                        <div class="card-title">Agents</div>
+                        <div class="card-desc">AI에 <strong>새 전문가를 추가</strong><br><a href="translation-ar-yoon-sejin.md" target="_blank" style="font-size: 0.85em; color: var(--primary); text-decoration: underline;">예시 보기 →</a></div>
                     </div>
                     <div class="card">
                         <div class="card-title">MCP Servers</div>
-                        <div class="card-desc">외부 서비스 연동<br>(Linear, Slack 등)</div>
+                        <div class="card-desc">다른 앱과 연결<br>(Slack, 캘린더 등)</div>
                     </div>
                     <div class="card">
                         <div class="card-title">Hooks</div>
-                        <div class="card-desc">이벤트 기반<br>자동 실행 핸들러</div>
-                    </div>
-                </div>
-                <div class="two-col fragment fade-up" style="margin-top: 0.8em;">
-                    <div>
-                        <div class="col-title">Skills 핵심 특성</div>
-                        <div class="numbered-list" style="margin: 0;">
-                            <div class="numbered-item" style="padding: 8px 0;">
-                                <div class="num">1</div>
-                                <div class="content">
-                                    <div class="title">합성 가능 (Composable)</div>
-                                    <div class="desc">여러 Skills를 스택 — AI가 자동으로 조합</div>
-                                </div>
-                            </div>
-                            <div class="numbered-item" style="padding: 8px 0;">
-                                <div class="num">2</div>
-                                <div class="content">
-                                    <div class="title">이식성 (Portable)</div>
-                                    <div class="desc">Claude 앱 · API · Code 어디서든 동일 포맷</div>
-                                </div>
-                            </div>
-                            <div class="numbered-item" style="padding: 8px 0;">
-                                <div class="num">3</div>
-                                <div class="content">
-                                    <div class="title">효율적 (Efficient)</div>
-                                    <div class="desc">필요한 순간에 필요한 것만 로드</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="col-title">사용 예시</div>
-                        <div class="terminal" style="margin: 0;">
-                            <div class="terminal-header">
-                                <span class="dot red"></span>
-                                <span class="dot yellow"></span>
-                                <span class="dot green"></span>
-                                <span style="color: #484f58; font-size: 0.8em; margin-left: 8px;">Claude Code</span>
-                            </div>
-                            <div class="terminal-body" style="font-size: 0.85em; line-height: 2;">
-                                <span class="comment"># 플러그인 설치</span><br>
-                                <span class="prompt">›</span> <span class="cmd">/plugin install code-review</span><br>
-                                <span class="comment"># Skill 자동 호출 (맥락 기반)</span><br>
-                                <span class="prompt">›</span> <span class="cmd">이 데이터를 Excel로 정리해줘</span><br>
-                                <span class="comment"># 슬래시 커맨드로 직접 호출</span><br>
-                                <span class="prompt">›</span> <span class="cmd">/code-review:review PR #42 검토해줘</span>
-                            </div>
-                        </div>
+                        <div class="card-desc">특정 상황이 되면<br>자동으로 실행되는 규칙</div>
                     </div>
                 </div>
                 <div style="display: flex; gap: 15px; margin-top: 0.6em;" class="fragment fade-up">
                     <div class="info-box" style="flex: 1;">
-                        <div class="title">📦 플러그인 구조</div>
-                        <div class="desc"><code style="font-family: var(--font-mono); background: var(--primary-50); color: var(--primary); padding: 2px 6px; border-radius: 4px;">.claude-plugin/plugin.json</code> + skills/ + agents/ + hooks/</div>
+                        <div class="title">📦 플러그인 = 폴더 하나</div>
+                        <div class="desc">설정 파일 + Skills + 에이전트 + 자동화 규칙을 하나로 묶은 패키지</div>
                     </div>
                     <div class="info-box success" style="flex: 1;">
-                        <div class="title">🏪 Marketplace & Partners</div>
-                        <div class="desc">Box, Canva 등 파트너 Skills 디렉터리 + 커뮤니티 배포</div>
+                        <div class="title">🏪 만들고, 공유하고, 설치하고</div>
+                        <div class="desc">한 번 만들면 팀 전체가 사용 가능</div>
                     </div>
                 </div>
                 <div class="fragment fade-up" style="margin-top: 0.6em; text-align: center;">
                     <a href="https://claude.com/blog/skills" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: 600; font-size: 1em;">📖 claude.com/blog/skills — 공식 Skills 블로그</a>
+                    <span style="margin: 0 0.8em; color: var(--text-muted);">|</span>
+                    <a href="https://claudemarketplaces.com/" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: 600; font-size: 1em;">🏪 claudemarketplaces.com — Skills 마켓플레이스</a>
                 </div>
                 </div>
             </section>
