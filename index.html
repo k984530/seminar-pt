@@ -1254,34 +1254,26 @@
             <section style="padding-top: 30px !important;">
                 <h3>TERMINAL BASICS</h3>
                 <h2 style="margin-bottom: 0.4em;">터미널 기본 명령어</h2>
-                <div class="card-grid cols-3 fragment fade-up" style="margin-top: 0.5em;">
-                    <div class="card">
-                        <div class="card-title" style="font-family: var(--font-mono); color: var(--primary);">cd</div>
-                        <div class="card-desc">디렉토리 이동<br><span style="color: var(--text-muted); font-size: 0.9em;">Change Directory</span></div>
-                    </div>
-                    <div class="card">
-                        <div class="card-title" style="font-family: var(--font-mono); color: var(--primary);">ls</div>
-                        <div class="card-desc">파일/폴더 목록 조회<br><span style="color: var(--text-muted); font-size: 0.9em;">List</span></div>
-                    </div>
-                    <div class="card">
-                        <div class="card-title" style="font-family: var(--font-mono); color: var(--primary);">mkdir</div>
-                        <div class="card-desc">새 폴더 생성<br><span style="color: var(--text-muted); font-size: 0.9em;">Make Directory</span></div>
-                    </div>
-                </div>
-                <div class="terminal fragment fade-up" style="margin-top: 1em;">
+                <div class="terminal fragment fade-up" style="margin-top: 0.5em;">
                     <div class="terminal-header">
                         <span class="dot red"></span>
                         <span class="dot yellow"></span>
                         <span class="dot green"></span>
                         <span style="color: #94a3b8; font-size: 0.8em; margin-left: 8px;">Terminal</span>
                     </div>
-                    <div class="terminal-body" style="font-size: 1em; line-height: 2.2;">
-                        <span class="comment"># 프로젝트 폴더 생성</span><br>
-                        <span class="prompt">$</span> <span class="cmd">mkdir test</span><br>
-                        <span class="comment"># 폴더로 이동</span><br>
-                        <span class="prompt">$</span> <span class="cmd">cd test</span><br>
-                        <span class="comment"># Claude Code 실행</span><br>
-                        <span class="prompt">$</span> <span class="cmd">claude</span>
+                    <div class="terminal-body" style="font-size: 0.95em; line-height: 2;">
+                        <span class="comment"># ls — 현재 폴더 안에 뭐가 있는지 보기 (List)</span><br>
+                        <span class="prompt">$</span> <span class="cmd">ls</span><br>
+                        <span style="color: #7ee787;">Desktop</span>  <span style="color: #7ee787;">Documents</span>  <span style="color: #7ee787;">Downloads</span>  <span style="color: #e6edf3;">사진.jpg</span>  <span style="color: #e6edf3;">보고서.docx</span><br>
+                        <br>
+                        <span class="comment"># mkdir — 새 폴더 만들기 (Make Directory)</span><br>
+                        <span class="prompt">$</span> <span class="cmd">mkdir my-project</span><br>
+                        <br>
+                        <span class="comment"># cd — 폴더로 들어가기 (Change Directory)</span><br>
+                        <span class="prompt">$</span> <span class="cmd">cd my-project</span><br>
+                        <br>
+                        <span class="comment"># Claude Code 실행!</span><br>
+                        <span class="prompt">~/my-project $</span> <span class="cmd">claude</span>
                     </div>
                 </div>
             </section>
@@ -1443,6 +1435,18 @@
                 </div>
             </section>
 
+            <!-- 6.5 더 고도화된 형태 — 에이전틱 코딩 -->
+            <section style="padding-top: 30px !important;">
+                <h3>ADVANCED EXAMPLE</h3>
+                <h2 style="margin-bottom: 0.3em;">더 고도화된 형태</h2>
+                <p style="font-size: 1.05em; color: var(--text-light); margin-bottom: 0.6em;">결제 시스템까지 — <span class="text-primary font-semibold">에이전틱 코딩</span>의 가능성</p>
+                <div class="fragment fade-up" style="margin-top: 0.3em;">
+                    <div style="position: relative; width: 100%; max-width: 800px; margin: 0 auto; aspect-ratio: 16/9; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-lg);">
+                        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/k1l4NJw5SF0?start=193" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+                    </div>
+                </div>
+            </section>
+
             <!-- 7. 에이전트 팀 기능 -->
             <section style="padding-top: 25px !important;">
                 <h3>AGENT TEAMS</h3>
@@ -1594,18 +1598,6 @@
                 </div>
             </section>
 
-            <!-- Q&A -->
-            <section class="ending-slide" data-background-gradient="linear-gradient(135deg, #ffe8f3, #d9f3ff)">
-                <h2>Q&A</h2>
-                <p class="tagline">
-                    AI 적용 및 도입에 대해<br>
-                    궁금한 점을 자유롭게 질문해주세요
-                </p>
-                <p style="margin-top: 2.5em; font-size: 1.15em; color: var(--text-muted); font-family: var(--font-mono); letter-spacing: 0.02em; position: relative; z-index: 1;">
-                    alyduho@medisolveai.com
-                </p>
-            </section>
-
             <!-- 개선점 -->
             <section style="padding: 0 !important;">
                 <div class="scroll-wrapper" style="height: 720px; overflow-y: auto; padding: 30px 80px 50px 80px;">
@@ -1684,6 +1676,38 @@
                     </div>
                 </div>
                 </div>
+            </section>
+
+            <!-- Q&A -->
+            <section class="ending-slide" data-background-gradient="linear-gradient(135deg, #ffe8f3, #d9f3ff)">
+                <h2>Q&A</h2>
+                <p class="tagline">
+                    AI 적용 및 도입에 대해<br>
+                    궁금한 점을 자유롭게 질문해주세요
+                </p>
+                <p style="margin-top: 2.5em; font-size: 1.15em; color: var(--text-muted); font-family: var(--font-mono); letter-spacing: 0.02em; position: relative; z-index: 1;">
+                    alyduho@medisolveai.com
+                </p>
+                <a href="발표대본.docx" download style="
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 0.4em;
+                    margin-top: 1.2em;
+                    padding: 0.5em 1.2em;
+                    background: rgba(255,255,255,0.15);
+                    border: 1px solid rgba(255,255,255,0.3);
+                    border-radius: var(--radius-sm);
+                    color: var(--navy);
+                    font-family: 'Pretendard', sans-serif;
+                    font-size: 0.85em;
+                    font-weight: 600;
+                    text-decoration: none;
+                    position: relative;
+                    z-index: 1;
+                    transition: background 0.2s;
+                " onmouseover="this.style.background='rgba(255,255,255,0.35)'" onmouseout="this.style.background='rgba(255,255,255,0.15)'">
+                    📄 발표 대본 다운로드
+                </a>
             </section>
 
         </div>
